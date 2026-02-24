@@ -45,7 +45,7 @@ jobs:
       - name: Use crates.io dependencies
         shell: bash
         run: |
-          sed -i.bak 's|evo-agent-sdk = { path = "[^"]*" }|evo-agent-sdk = "0.1"|' Cargo.toml
+          sed -i.bak 's|evo-agent-sdk = { path = "[^"]*" }|evo-agent-sdk = "0.2"|' Cargo.toml
           rm -f Cargo.toml.bak
 
       - name: Build
