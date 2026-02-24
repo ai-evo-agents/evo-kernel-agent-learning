@@ -1,0 +1,6 @@
+api-key.config
+.env
+evo-runner
+evo-runner.exe
+logs/
+target/
