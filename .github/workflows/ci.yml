@@ -13,3 +13,20 @@ jobs:
         run: test -f soul.md
       - name: Validate soul.md has Role header
         run: grep -q "## Role" soul.md
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+      - uses: Swatinem/rust-cache@v2
+      - name: Use crates.io dependencies
+        run: |
+          sed -i.bak 's|evo-agent-sdk = { path = "[^"]*" }|evo-agent-sdk = "0.1"|' Cargo.toml
+          rm -f Cargo.toml.bak
+      - run: cargo fmt --check
+      - run: cargo clippy -- -D warnings
+      - run: cargo build
+      - run: cargo test
